@@ -12,11 +12,38 @@ def transform_datasets(_winter_df: pd.DataFrame, _summer_df: pd.DataFrame) -> pd
     return _df
 
 
-def get_total_duration_per_subject(_df: pd.DataFrame, _ects: pd.DataFrame) -> pd.DataFrame:
-    _dur_df = _df[['Subject', 'Duration [hrs]']].groupby(['Subject']).sum()
+def compute_expected_duration_per_subject(_df: pd.DataFrame, _ects: pd.DataFrame) -> pd.DataFrame:
+    _dur_df = _df[['Subject', 'Duration [hrs]']].groupby(['Subject'], as_index=False).sum()
     _dur_df = _dur_df.join(other=_ects.set_index('Subject'), how='inner')
     _dur_df = _dur_df.sort_values(by=['ECTS', 'Duration [hrs]'], ascending=False)
 
     _dur_df['Min exp duration [hrs]'] = _dur_df['ECTS'] * 25
     _dur_df['Max exp duration [hrs]'] = _dur_df['ECTS'] * 30
     return _dur_df
+
+
+def compute_total_duration_per_subject(_df: pd.DataFrame) -> pd.DataFrame:
+    ret_df = _df[['Subject', 'Semester', 'Duration [hrs]']].groupby(['Subject', 'Semester'], as_index=False).sum()
+    ret_df.sort_values(by='Duration [hrs]', ascending=False, inplace=True)
+    return ret_df
+
+
+def filter_by_semester(_df: pd.DataFrame, key: str) -> pd.DataFrame:
+    match key:
+        case 'winter':
+            return _df[_df['Semester'] == 'W']
+        case 'summer':
+            return _df[_df['Semester'] == 'S']
+    return _df
+
+
+# load the datasets
+winter_df = pd.read_csv("data/winter-semester.csv")
+summer_df = pd.read_csv("data/summer-semester.csv")
+ects = pd.read_csv("data/ects.csv")
+
+# transform the dataset
+df = transform_datasets(winter_df, summer_df)
+
+expected_dur_per_subj_df = compute_expected_duration_per_subject(df, ects)
+total_dur_per_subj_df = compute_total_duration_per_subject(df)
