@@ -17,19 +17,20 @@ df = transform_datasets(winter_df, summer_df)
 # create the Dash app
 app = Dash()
 app.layout = html.Div([
-    html.Button('Winter semester', id='winter-semester-button', n_clicks=0, style=default_button_style),
-    html.Button('Summer semester', id='summer-semester-button', n_clicks=0, style=default_button_style),
-    html.Button('Total', id='total-button', n_clicks=0, style=default_button_style),
+    html.Button('Winter semester', id='winter-semester-button', n_clicks=0, className='simplistic-button'),
+    html.Button('Summer semester', id='summer-semester-button', n_clicks=0, className='simplistic-button'),
+    html.Button('Total', id='total-semester-button', n_clicks=0, className='simplistic-button'),
     html.Div(id='display-div')
-])
+], id='navigation-bar')
+
 
 @app.callback(
     Output('display-div', 'children'),
     Input('winter-semester-button', 'n_clicks'),
     Input('summer-semester-button', 'n_clicks'),
-    Input('total-button', 'n_clicks')
+    Input('total-semester-button', 'n_clicks')
 )
-def change_display(winter_btn, summer_btn, total_btn):
+def change_display(n_clicks_winter: int, n_clicks_summer: int, n_clicks_total: int) -> html.Div:
     match ctx.triggered_id:
         case 'winter-semester-button':
             return html.Div("WINTER")
@@ -37,7 +38,7 @@ def change_display(winter_btn, summer_btn, total_btn):
             return html.Div("SUMMER")
         case 'total-semester-button':
             return html.Div("TOTAL")
-    return html.Div("NADA")
+    return html.Div()
 
 
 if __name__ == '__main__':

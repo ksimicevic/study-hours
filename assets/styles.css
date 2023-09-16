@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#navigation-bar {
+    display: flex;
+    padding-right: 25%;
+    padding-left: 25%;
+    justify-content: space-between;
+}
+
+.simplistic-button {
+    background-color: white;
+    border: none;
+    color: black;
+    font-family: "Calibri Light", sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    padding: 0.5em 0.5em;
+    text-align: center;
+    letter-spacing: normal;
+    line-height: 0.5em;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.simplistic-button::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: black;
+    transition: 0.3s;
+    transform-origin: center;
+}
+
+.simplistic-button:hover::before {
+    width: 100%;
+    transform: scaleX(2);
+    transform-origin: center;
+}
