@@ -16,11 +16,61 @@ body {
     text-transform: uppercase;
 }
 
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+.uppercase-paragraph {
+    font-family: "Calibri Light", sans-serif;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding-left: 5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.paragraph {
+    font-family: "Calibri Light", sans-serif;
+    font-size: 18px;
+    padding-left: 5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
 #navigation-bar {
     display: flex;
     padding-right: 25%;
     padding-left: 25%;
     justify-content: space-between;
+}
+
+#total-time-div {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+#ects-paragraph-div {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+#ects-div {
+    display: flex;
+    padding-right: 5%;
+    padding-left: 5%;
+    justify-content: center;
+}
+
+#ects-graph-div {
+    display: inline-block;
+    padding-right: 5%;
+}
+
+#ects-table-div {
+    display: inline-block;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-right: 5%;
 }
 
 .simplistic-button {
