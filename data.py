@@ -46,5 +46,5 @@ ects = pd.read_csv("data/ects.csv")
 # transform the dataset
 df = transform_datasets(winter_df, summer_df)
 
-expected_and_realized_dur_per_subj_df = compute_expected_duration_per_subject(df, ects)
+expected_and_realised_dur_per_subj_df = compute_expected_duration_per_subject(df, ects)
 total_dur_per_subj_df = compute_total_duration_per_subject(df)

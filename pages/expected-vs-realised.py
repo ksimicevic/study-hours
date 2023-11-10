@@ -1,6 +1,8 @@
 import dash
-from dash import callback, Input, Output, ctx, html, dcc, dash_table
 import plotly.express as px
+import plotly.graph_objects as go
+
+from dash import callback, Input, Output, ctx, html, dcc, dash_table
 
 from data import *
 
@@ -13,7 +15,7 @@ layout = html.Div([
                id='ects-paragraph', className='paragraph')
         ], id='ects-paragraph-div'),
         html.Div([
-            html.Div([dcc.Graph(id='expected-vs-realized-graph')], id='ects-graph-div'),
+            html.Div([dcc.Graph(id='expected-vs-realised-graph')], id='ects-graph-div'),
             html.Div([dash_table.DataTable(
                 id='ects-table',
                 style_cell={
@@ -28,7 +30,7 @@ layout = html.Div([
             )], id='ects-table-div')
         ], id='ects-div')
     ],
-    id='expected-vs-realized-ects-div'
+    id='expected-vs-realised-ects-div'
 )
 
 
@@ -36,7 +38,7 @@ dash.register_page("expected-vs-realised", name="Expected vs Realised Effort", l
 
 
 @callback(
-    Output('expected-vs-realized-graph', 'figure'),
+    Output('expected-vs-realised-graph', 'figure'),
     Output('ects-table', 'data'),
     Input('winter-semester-button', 'n_clicks'),
     Input('summer-semester-button', 'n_clicks'),
@@ -44,15 +46,25 @@ dash.register_page("expected-vs-realised", name="Expected vs Realised Effort", l
 )
 def plot_expected_vs_realised_time(n_clicks_winter: int, n_clicks_summer: int, n_clicks_total: int):
     key = ctx.triggered_id.split('-')[0] if ctx.triggered_id is not None else 'total'
-    filtered_ects_df = filter_by_semester(expected_and_realized_dur_per_subj_df, key)
-    fig = px.bar(
+    filtered_ects_df = filter_by_semester(expected_and_realised_dur_per_subj_df, key)
+
+    bar_fig = px.bar(
         filtered_ects_df, x='Subject', y='MinMaxDiff', base='Min exp duration [hrs]',
-        hover_data={'MinMaxDiff': False, 'Subject': True, 'Min exp duration [hrs]': True, 'Max exp duration [hrs]': True}
+        hover_data={'MinMaxDiff': False, 'Subject': True, 'Min exp duration [hrs]': True, 'Max exp duration [hrs]': True},
+        opacity=0.7
+    ).update_traces(marker=dict(color='#317773'))
+    scatter_fig = px.scatter(
+            data_frame=filtered_ects_df, x='Subject', y='Duration [hrs]', text='Duration [hrs]', size='Duration [hrs]', size_max=15
+    ).update_traces(
+        textposition='top center',
+        texttemplate='%{y:.1f}',
+        marker=dict(color='#FF69B4', line=dict(color='black', width=1.5))
     )
-    # fig.add_traces(px.line(data_frame=filtered_ects_df, x='Subject', y='Duration [hrs]', text='Duration [hrs]').data)
+
+    fig = go.Figure().add_traces([*bar_fig.data, *scatter_fig.data])
     fig.update_layout(
         title={
-            'text': 'Expected vs realized time spent per subject',
+            'text': 'Expected vs realised time spent per subject',
             'y': 0.95,
             'x': 0.5,
             'xanchor': 'center',
