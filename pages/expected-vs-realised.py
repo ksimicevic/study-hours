@@ -31,7 +31,7 @@ layout = html.Div([
             )], id='ects-table-div')
         ], id='ects-div')
     ],
-    id='expected-vs-realised-ects-div'
+    id='expected-vs-realised-div'
 )
 
 
@@ -72,6 +72,7 @@ def plot_expected_vs_realised_time(n_clicks_winter: int, n_clicks_summer: int, n
             'text': 'Expected vs realised time spent per subject',
             'y': 0.95,
             'x': 0.5,
+            'font': dict(size=20),
             'xanchor': 'center',
             'yanchor': 'top'
         },

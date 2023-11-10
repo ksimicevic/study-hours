@@ -9,7 +9,7 @@ layout = html.Div([
         semester_nav_bar,
         dcc.Graph(id='time-per-subject-barchart'),
         html.P(id='sum-hours', className='uppercase-paragraph')
-    ], id='total-time-div'
+    ], id='time-per-subject-div'
 )
 
 
@@ -32,8 +32,9 @@ def plot_time_per_subject(n_clicks_winter: int, n_clicks_summer: int, n_clicks_t
     fig.update_layout(
         title={
             'text': 'Total time spent per subject',
-            'y': 0.9,
+            'y': 0.95,
             'x': 0.5,
+            'font': dict(size=20),
             'xanchor': 'center',
             'yanchor': 'top'
         },
