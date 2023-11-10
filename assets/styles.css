@@ -73,6 +73,13 @@ hr.solid {
     padding-right: 5%;
 }
 
+#activity-pie-div {
+    padding-top: 1%;
+    padding-right: 5%;
+    padding-left: 5%;
+    justify-content: center;
+}
+
 .simplistic-button {
     background-color: white;
     border: none;

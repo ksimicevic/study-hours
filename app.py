@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 from dash import Dash, html
 
 # custom order of pages in the navigation bar
-pages_order = ['homepage', 'time-per-subject', 'expected-vs-realised']
+pages_order = ['homepage', 'time-per-subject', 'expected-vs-realised', 'activity-pie']
 
 # create the Dash app
 app = Dash("study hours 2020/2021 dashboard", use_pages=True, suppress_callback_exceptions=True)
@@ -15,6 +15,7 @@ app.layout = html.Div([
             dash.page_registry[page_id]['name'], href=dash.page_registry[page_id]['relative_path'], class_name='simplistic-button'
         ) for page_id in pages_order
     ], id='pages-navigation-bar', className='navigation-bar'),
+    html.Hr(className='hr.solid'),
     dash.page_container
 ], id='main')
 

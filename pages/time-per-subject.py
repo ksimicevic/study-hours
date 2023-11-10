@@ -2,7 +2,7 @@ import dash
 from dash import callback, Input, Output, ctx, html, dcc
 import plotly.express as px
 
-from data import *
+from data import filter_by_semester, total_dur_per_subj_df
 from common import semester_nav_bar
 
 layout = html.Div([
@@ -26,7 +26,9 @@ dash.register_page("time-per-subject", name="Time per Subject", layout=layout)
 def plot_time_per_subject(n_clicks_winter: int, n_clicks_summer: int, n_clicks_total: int):
     key = ctx.triggered_id.split('-')[0] if ctx.triggered_id is not None else 'total'
     time_per_subj_df = filter_by_semester(total_dur_per_subj_df, key)
-    fig = px.bar(time_per_subj_df, x='Subject', y='Duration [hrs]', color='Subject')
+    fig = px.bar(
+        time_per_subj_df, x='Subject', y='Duration [hrs]', color='Subject', color_discrete_sequence=px.colors.qualitative.Set3
+    )
     fig.update_layout(
         title={
             'text': 'Total time spent per subject',

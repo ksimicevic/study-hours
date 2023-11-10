@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 
 from dash import callback, Input, Output, ctx, html, dcc, dash_table
 
-from data import *
+from data import filter_by_semester, expected_and_realised_dur_per_subj_df
 from common import semester_nav_bar
 
 layout = html.Div([
@@ -53,16 +53,20 @@ def plot_expected_vs_realised_time(n_clicks_winter: int, n_clicks_summer: int, n
         filtered_ects_df, x='Subject', y='MinMaxDiff', base='Min exp duration [hrs]',
         hover_data={'MinMaxDiff': False, 'Subject': True, 'Min exp duration [hrs]': True, 'Max exp duration [hrs]': True},
         opacity=0.7
-    ).update_traces(marker=dict(color='#317773'))
+    )
+    bar_fig.update_traces(marker=dict(color='#317773'))
+
     scatter_fig = px.scatter(
             data_frame=filtered_ects_df, x='Subject', y='Duration [hrs]', text='Duration [hrs]', size='Duration [hrs]', size_max=15
-    ).update_traces(
+    )
+    scatter_fig.update_traces(
         textposition='top center',
         texttemplate='%{y:.1f}',
         marker=dict(color='#FF69B4', line=dict(color='black', width=1.5))
     )
 
-    fig = go.Figure().add_traces([*bar_fig.data, *scatter_fig.data])
+    fig = go.Figure()
+    fig.add_traces([*bar_fig.data, *scatter_fig.data])
     fig.update_layout(
         title={
             'text': 'Expected vs realised time spent per subject',
