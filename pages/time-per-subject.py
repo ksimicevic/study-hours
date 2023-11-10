@@ -3,8 +3,10 @@ from dash import callback, Input, Output, ctx, html, dcc
 import plotly.express as px
 
 from data import *
+from common import semester_nav_bar
 
 layout = html.Div([
+        semester_nav_bar,
         dcc.Graph(id='time-per-subject-barchart'),
         html.P(id='sum-hours', className='uppercase-paragraph')
     ], id='total-time-div'

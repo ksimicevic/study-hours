@@ -5,9 +5,10 @@ import plotly.graph_objects as go
 from dash import callback, Input, Output, ctx, html, dcc, dash_table
 
 from data import *
-
+from common import semester_nav_bar
 
 layout = html.Div([
+        semester_nav_bar,
         html.Div([
         html.P("Each subject is assigned a number of ECTS points.\n"
                "They measure the amount of work invested by the student, including preparation and reviewing time for the courses.\n"
