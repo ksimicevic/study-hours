@@ -59,6 +59,7 @@ def update_activity_pie(subject, options):
             'xanchor': 'center',
             'yanchor': 'top'
         },
+        legend_title_text='Activity',
         height=600,
         width=1200
     )
