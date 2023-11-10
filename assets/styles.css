@@ -37,7 +37,7 @@ hr.solid {
     padding-bottom: 1%;
 }
 
-#navigation-bar {
+.navigation-bar {
     display: flex;
     padding-right: 25%;
     padding-left: 25%;

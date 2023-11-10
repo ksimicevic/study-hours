@@ -19,6 +19,7 @@ def compute_expected_duration_per_subject(_df: pd.DataFrame, _ects: pd.DataFrame
 
     _dur_df['Min exp duration [hrs]'] = _dur_df['ECTS'] * 25
     _dur_df['Max exp duration [hrs]'] = _dur_df['ECTS'] * 30
+    _dur_df['MinMaxDiff'] = _dur_df['Max exp duration [hrs]'] - _dur_df['Min exp duration [hrs]']
     return _dur_df
 
 
