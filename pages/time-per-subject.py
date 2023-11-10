@@ -3,12 +3,21 @@ from dash import callback, Input, Output, ctx, html, dcc
 import plotly.express as px
 
 from data import filter_by_semester, total_dur_per_subj_df
-from common import semester_nav_bar
+from common import semester_nav_bar, footer
+
+introduction_paragraph = """
+    The initial visualisation is straightforward, presenting the total hours dedicated to each subject throughout the academic year in descending order. 
+    It offers the option to filter the visualization to display subjects solely within the selected semester.
+"""
 
 layout = html.Div([
+        html.Div([html.P(introduction_paragraph, className='paragraph')], className='paragraph-div'),
         semester_nav_bar,
-        dcc.Graph(id='time-per-subject-barchart'),
-        html.P(id='sum-hours', className='uppercase-paragraph')
+        html.Div([
+            dcc.Graph(id='time-per-subject-barchart'),
+            html.P(id='sum-hours', className='uppercase-paragraph')
+        ], id='time-per-subject-graph-div', className='visualisation-div'),
+        footer
     ], id='time-per-subject-div'
 )
 

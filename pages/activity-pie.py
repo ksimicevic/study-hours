@@ -4,15 +4,26 @@ import plotly.express as px
 from dash import callback, Input, Output, html, dcc
 
 from data import ects, activity_df
+from common import footer
+
+activity_introduction = """
+    For each subject, I engaged in various activities in order to pass it, including studying, completing laboratory
+    exercises, and attending lectures. The Activity Pie illustrates the ratio between activities for each Subject.
+"""
 
 layout = html.Div([
-        dcc.Dropdown(ects['Subject'], placeholder="Select a Subject...", clearable=False, id='subject-dropdown'),
+        html.Div([
+            html.P(activity_introduction, id='activity-introduction-paragraph', className='paragraph')
+        ], id='activity-paragraph-div', className='paragraph-div'),
+        dcc.Dropdown(ects['Subject'], placeholder="Select a Subject...", clearable=False,
+                     id='subject-dropdown', style={'padding-left': '5%', 'padding-right': '5%'}),  # style must be set on inner div
         html.Div([
             html.P("Activity Pie options: ", id='activity-pie-options', className='activity-pie-options-item'),
             dcc.Checklist(id='activity-pie-options', options=['Show hours'], value=['Show hours'],
                           inline=True, className='activity-pie-options-item')
-        ], id='activity-pie-options-div'),
-        html.Div([dcc.Graph(id='activity-pie')], id='activity-pie-graph-div')
+        ], id='activity-pie-options-div', className='padded-div'),
+        html.Div([dcc.Graph(id='activity-pie')], id='activity-pie-graph-div', className='visualisation-div'),
+        footer
     ], id='activity-pie-div'
 )
 

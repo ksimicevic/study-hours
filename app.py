@@ -7,7 +7,7 @@ from dash import Dash, html
 pages_order = ['homepage', 'time-per-subject', 'expected-vs-realised', 'activity-pie']
 
 # create the Dash app
-app = Dash("study hours 2020/2021 dashboard", use_pages=True, suppress_callback_exceptions=True)
+app = Dash("study-hours-dashboard", use_pages=True, suppress_callback_exceptions=True)
 app.layout = html.Div([
     html.H1("Study hours 2020/2021 dashboard", className='title'),
     html.Div([

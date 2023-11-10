@@ -16,6 +16,15 @@ body {
     text-transform: uppercase;
 }
 
+.footer {
+    font-family: "Calibri Light", sans-serif;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+}
+
 hr.solid {
   border-top: 3px solid #bbb;
 }
@@ -32,7 +41,6 @@ hr.solid {
 .paragraph {
     font-family: "Calibri Light", sans-serif;
     font-size: 18px;
-    padding-left: 5%;
     padding-top: 1%;
     padding-bottom: 1%;
 }
@@ -44,12 +52,7 @@ hr.solid {
     justify-content: space-between;
 }
 
-#time-per-subject-div {
-    padding-right: 5%;
-    padding-left: 5%;
-}
-
-#ects-paragraph-div {
+.visualisation-div, .paragraph-div, .padded-div {
     padding-right: 5%;
     padding-left: 5%;
 }
@@ -75,8 +78,6 @@ hr.solid {
 
 #activity-pie-div {
     padding-top: 1%;
-    padding-right: 5%;
-    padding-left: 5%;
     justify-content: center;
 }
 

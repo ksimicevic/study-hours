@@ -5,16 +5,25 @@ import plotly.graph_objects as go
 from dash import callback, Input, Output, ctx, html, dcc, dash_table
 
 from data import filter_by_semester, expected_and_realised_dur_per_subj_df
-from common import semester_nav_bar
+from common import semester_nav_bar, footer
+
+ects_introduction = """
+    Each subject is assigned a number of ECTS points.
+    They measure the amount of work invested by the student, including preparation and reviewing time for the courses.
+    One ECTS point corresponds to 25–30 hours of time depending on the country.
+"""
+
+visualisation_introduction = """
+    This visualisation will present the total hours dedicated to each subject, 
+    contrasting it with the expected hours determined by the assigned ECTS points for each subject.
+"""
 
 layout = html.Div([
-        semester_nav_bar,
         html.Div([
-        html.P("Each subject is assigned a number of ECTS points.\n"
-               "They measure the amount of work invested by the student, including preparation and reviewing time for the courses.\n"
-               "One ECTS point corresponds to 25–30 hours of time depending on country.\n",
-               id='ects-paragraph', className='paragraph')
-        ], id='ects-paragraph-div'),
+            html.P(ects_introduction, id='ects-paragraph', className='paragraph'),
+            html.P(visualisation_introduction, id='visualisation-paragraph', className='paragraph')
+        ], id='ects-paragraph-div', className='paragraph-div'),
+        semester_nav_bar,
         html.Div([
             html.Div([dcc.Graph(id='expected-vs-realised-graph')], id='ects-graph-div'),
             html.Div([dash_table.DataTable(
@@ -29,7 +38,8 @@ layout = html.Div([
                 }
                 # style_as_list_view=True
             )], id='ects-table-div')
-        ], id='ects-div')
+        ], id='ects-div'),
+        footer
     ],
     id='expected-vs-realised-div'
 )
