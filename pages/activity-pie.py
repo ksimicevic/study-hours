@@ -15,7 +15,7 @@ layout = html.Div([
         html.Div([
             html.P(activity_introduction, id='activity-introduction-paragraph', className='paragraph')
         ], id='activity-paragraph-div', className='paragraph-div'),
-        dcc.Dropdown(ects['Subject'], placeholder="Select a Subject...", clearable=False,
+        dcc.Dropdown(ects['Subject'], placeholder="Select a Subject...", searchable=False, clearable=False,
                      id='subject-dropdown', style={'padding-left': '5%', 'padding-right': '5%'}),  # style must be set on inner div
         html.Div([
             html.P("Activity Pie options: ", id='activity-pie-options', className='activity-pie-options-item'),
@@ -51,6 +51,7 @@ def update_activity_pie(subject, options):
     if subject is None:
         return {}
 
+    # temporary solution until/if I come up with more options
     show_hours = 'Show hours' in options
 
     fig = px.pie(
