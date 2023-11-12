@@ -14,7 +14,7 @@ ects_introduction = """
 """
 
 visualisation_introduction = """
-    This visualisation will present the total hours dedicated to each subject, 
+    This visualisation presents the total hours dedicated to each subject, 
     contrasting it with the expected hours determined by the assigned ECTS points for each subject.
 """
 
@@ -40,8 +40,7 @@ layout = html.Div([
             )], id='ects-table-div')
         ], id='ects-div'),
         footer
-    ],
-    id='expected-vs-realised-div'
+    ], id='expected-vs-realised-div'
 )
 
 
@@ -76,8 +75,22 @@ def plot_expected_vs_realised_time(n_clicks_winter: int, n_clicks_summer: int, n
         marker=dict(color=realised_color, line=dict(color='black', width=1.5))
     )
 
+    # custom legend
+    legend_fig = go.Figure()
+    legend_fig.add_trace(
+        go.Scatter(
+            x=[None], y=[None], name='Expected time to spend', mode='markers',
+            line=dict(color=expected_color), showlegend=True
+        )
+    )
+    legend_fig.add_trace(
+        go.Scatter(x=[None], y=[None], name='True time spent', mode='markers',
+                   line=dict(color=realised_color), showlegend=True
+       )
+    )
+
     fig = go.Figure()
-    fig.add_traces([*bar_fig.data, *scatter_fig.data])
+    fig.add_traces([*bar_fig.data, *scatter_fig.data, *legend_fig.data])
     fig.update_layout(
         title=dict(
             text='Expected vs realised time spent per subject',
@@ -87,8 +100,16 @@ def plot_expected_vs_realised_time(n_clicks_winter: int, n_clicks_summer: int, n
             xanchor='center',
             yanchor='top'
         ),
+        legend=dict(
+            orientation='h',
+            itemsizing='constant',
+            xanchor='center',
+            yanchor='top',
+            y=0.97,
+            x=0.75,
+        ),
         xaxis_title='Subject',
-        yaxis_title='Expected time (hours)',
+        yaxis_title='Time (hours)',
         height=600,
         width=900
     )
