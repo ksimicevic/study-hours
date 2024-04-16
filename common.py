@@ -9,5 +9,5 @@ semester_nav_bar = html.Div([
 
 footer = html.Footer([
         html.Hr(className='hr.solid'),
-        html.P("Made by Korina Šimičević. 2020-2023.", className='paragraph')
+        html.P("Made by Korina Šimičević. 2020-2024.", className='paragraph')
 ], className='footer')

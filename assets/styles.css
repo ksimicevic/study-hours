@@ -88,8 +88,18 @@ hr.solid {
 
 #activity-pie-options-div {
     display: flex;
-    padding-top: 1%;
     justify-content: center;
+    padding-top: 1%;
+}
+
+#academic-calendar-div {
+    padding: 2%;
+}
+
+#academic-calendar-graph-div {
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
 }
 
 .simplistic-button {
@@ -102,13 +112,14 @@ hr.solid {
     padding: 0.5em 0.5em;
     text-align: center;
     letter-spacing: normal;
-    line-height: 0.5em;
+    line-height: 1em;
     cursor: pointer;
     text-decoration: none;
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
     transition: 0.3s;
+    white-space: normal;
 }
 
 .simplistic-button::before {

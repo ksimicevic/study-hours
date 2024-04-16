@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 
@@ -43,17 +44,15 @@ def filter_by_semester(_df: pd.DataFrame, key: str) -> pd.DataFrame:
     return _df
 
 
-
-
-
 # load the datasets
 winter_df = pd.read_csv("data/winter-semester.csv")
 summer_df = pd.read_csv("data/summer-semester.csv")
-ects = pd.read_csv("data/ects.csv")
+ects_df = pd.read_csv("data/ects.csv")
+calendar_heatmap_data = np.load("data/calendar_heatmap.npy", allow_pickle=True)
 
 # transform the dataset
 df = transform_datasets(winter_df, summer_df)
 
-expected_and_realised_dur_per_subj_df = compute_expected_duration_per_subject(df, ects)
+expected_and_realised_dur_per_subj_df = compute_expected_duration_per_subject(df, ects_df)
 total_dur_per_subj_df = compute_total_duration_per_subject(df)
 activity_df = compute_activity(df)
