@@ -54,7 +54,7 @@ def get_calendar_heatmaps() -> go.Figure:
     for annotations in list(fig.layout.annotations):
         annotations.y += 0.03
 
-    fig.update_xaxes(side='top')
+    fig.update_xaxes(tickangle=0, side='top')
     fig.update_yaxes(showticklabels=False)
 
     return fig

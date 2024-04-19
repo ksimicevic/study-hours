@@ -59,7 +59,7 @@ def update_activity_pie(subject, options):
         color_discrete_sequence=px.colors.qualitative.Set3
     )
     fig.update_traces(
-        hoverinfo='label+percent', textinfo='value+label' if show_hours else 'percent+label',
+        hoverinfo='label+percent', texttemplate='%{label}<br>%{value:.2f}h' if show_hours else '%{label}<br>%{percent}',
         textfont_size=18
     )
     fig.update_layout(

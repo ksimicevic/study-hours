@@ -7,7 +7,7 @@ from common import semester_nav_bar, footer
 
 introduction_paragraph = """
     The initial visualisation is straightforward, presenting the total hours dedicated to each subject throughout the academic year in descending order. 
-    It offers the option to filter the visualization to display subjects solely within the selected semester.
+    It offers the option to filter the visualisation to display subjects solely within the selected semester.
 """
 
 layout = html.Div([
